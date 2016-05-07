@@ -8,7 +8,7 @@ import libraries.Browser;
 import sourceCode.BookingStartPage;
 import sourceCode.UserProfilePage;
 
-public class TestCases1_3 {
+public class UserNameVerification {
 
 	BookingStartPage bookingStartPage;
 	UserProfilePage userProfilePage;
@@ -21,8 +21,8 @@ public class TestCases1_3 {
 
 	@BeforeClass
 	public void setUp() {
-		// Browser.openFirefox();
-		Browser.openChrome();
+		 Browser.openFirefox();
+		//Browser.openChrome();
 		bookingStartPage = Browser.openStartPage(theSiteURL);
 	}
 

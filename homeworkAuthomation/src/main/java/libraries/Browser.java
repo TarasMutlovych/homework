@@ -1,8 +1,11 @@
 package libraries;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import sourceCode.BookingStartPage;
 import sourceCode.StartPage;
@@ -28,6 +31,10 @@ public class Browser {
 		driver.close();
 	}
 
+	public static void waitForVisibility (WebDriver pageDriver, WebElement elment) {
+		WebDriverWait wait = new WebDriverWait(pageDriver, 10);
+		wait.until(ExpectedConditions.visibilityOf(elment));
+	}
 	
 	public static BookingStartPage openStartPage(String theSite) {
 		driver.get(theSite);
