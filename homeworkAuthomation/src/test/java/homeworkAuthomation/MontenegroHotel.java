@@ -6,19 +6,24 @@ import org.testng.annotations.Test;
 
 import libraries.Browser;
 import sourceCode.BookingStartPage;
+import sourceCode.HotelMontenegroPage;
+import sourceCode.PropertiesListPage;
 import sourceCode.ResultsPage;
 
 public class MontenegroHotel {
 
 	BookingStartPage bookingStartPage;
 	ResultsPage resultsPage;
+	PropertiesListPage propertiesListPage;
+	HotelMontenegroPage hotelMontenegroPage;
+
 	
 	private String theSiteURL = "http://www.booking.com/";
 	private String hotelName = "Hotel Montenegro";
 
 	//Make sure that date format is "dd/year-mm"
 	private String checInDate = "22/2016-6";
-	private String checkOutDate = "19/2016-7";
+	private String checkOutDate = "30/2016-6";
  
 
 	@BeforeClass
@@ -29,18 +34,34 @@ public class MontenegroHotel {
 	}
 	
 	@Test
-	public void serchForHotel() {
+	public void searchForHotel() {
 		bookingStartPage.enterHotelName(hotelName);
 		bookingStartPage.selectCheckInDate(checInDate);
 		bookingStartPage.selectCheckOutDate(checkOutDate);
 		resultsPage  = bookingStartPage.searchForTheHotel();
 	}
 	
-	@Test(dependsOnMethods = "serchForHotel") 
-	public void checkThatHotelPrsentsInResultList() {
+	@Test(dependsOnMethods = "searchForHotel") 
+	public void checkThatHotelPresentsInResultList() {
 		resultsPage.checkThePresenceOfHotel(hotelName);
 	}
 	
+	//Verifying free WiFi and Parking presence
+	@Test(dependsOnMethods = "checkThatHotelPresentsInResultList")
+	public void openHotelMontenegroPage() {
+		propertiesListPage = resultsPage.clickShowPropertiesButton();
+		hotelMontenegroPage = propertiesListPage.openTheHotelPage();
+	}
+	
+	@Test(dependsOnMethods = "openHotelMontenegroPage")
+	public void checkFreeWiFi() {
+		hotelMontenegroPage.checkPresenceOfFreeWiFiBenefit();
+	}
+	
+	@Test(dependsOnMethods = "openHotelMontenegroPage")
+	public void checkFreeParking() {
+		hotelMontenegroPage.checkPresenceOfFreeParkingBenefit();
+	}
 	@AfterClass
 	public void tearDown() {
 		Browser.close();

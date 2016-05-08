@@ -125,6 +125,7 @@ public class BookingStartPage extends StartPage {
 		monthYear = null;
 	}
 
+	@Step
 	public ResultsPage searchForTheHotel() {
 		searchForm.submit();
 		return new ResultsPage(driver);
