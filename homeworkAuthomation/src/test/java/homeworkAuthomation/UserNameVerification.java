@@ -6,13 +6,15 @@ import org.testng.annotations.Test;
 
 import libraries.Browser;
 import sourceCode.BookingStartPage;
+import sourceCode.DestinationTipsPage;
 import sourceCode.UserProfilePage;
 
 public class UserNameVerification {
 
 	BookingStartPage bookingStartPage;
 	UserProfilePage userProfilePage;
-
+	DestinationTipsPage destinationTipsPage;
+	
 	private String theSiteURL = "http://www.booking.com";
 	private String login = "patriotl@i.ua";
 	private String pass = "dominic0018";
@@ -21,26 +23,46 @@ public class UserNameVerification {
 
 	@BeforeClass
 	public void setUp() {
-		 Browser.openFirefox();
-		//Browser.openChrome();
+		//Browser.openFirefox();
+		Browser.openChrome();
 		bookingStartPage = Browser.openStartPage(theSiteURL);
 	}
 
-	@Test
+	@Test(priority = 1)
 	public void logIntoBookingCom() {
 		bookingStartPage.enterLogin(login);
 		bookingStartPage.enterPassword(pass);
 		userProfilePage = bookingStartPage.submitCredentials();
 	}
 
-	@Test(dependsOnMethods = "logIntoBookingCom")
+	@Test(priority = 2)
 	public void verifyUserFirstAndLastName() {
 		userProfilePage.verifyThatUserNameEqualsTo(expectedFirstname);
 		userProfilePage.verifyThatUserSurnameEqualsTo(expectedLastName);
 	}
-
+	
+	//Lviv region, Ukraine
+	
+	@Test(priority = 3)
+	public void openDestinationTipsPage() {
+		userProfilePage.clickGetDestinationTipsButton();
+		destinationTipsPage = userProfilePage.clickStartExploringButton();
+	}
+	
+	@Test(priority = 4)
+	public void searchResultsForLvivRegionUkraine () {
+		destinationTipsPage.enterLvivIntoSearch("Lviv");
+		destinationTipsPage.selectLvivRegionFromDropdown();
+		destinationTipsPage.clickSearchButton();
+	}
+	
+	@Test(priority = 5)
+	public void verifyThatDestinationsArePresent() {
+		destinationTipsPage.verifyThePresensOfResults();
+	}
+	
 	@AfterClass
 	public void tearDown() {
-		Browser.close();
+	Browser.close();
 	}
 }

@@ -34,6 +34,7 @@ public class PropertiesListPage {
 		for (String windowID : windows) {
 			currentWindowID = windowID;
 			if (!currentWindowID.equalsIgnoreCase(homePage)){
+				driver.close();
 				driver.switchTo().window(currentWindowID);
 			}
 		}

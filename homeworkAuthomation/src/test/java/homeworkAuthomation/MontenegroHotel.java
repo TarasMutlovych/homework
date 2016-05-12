@@ -28,8 +28,8 @@ public class MontenegroHotel {
 
 	@BeforeClass
 	public void setUp() {
-		Browser.openFirefox();
-		//Browser.openChrome();
+		//Browser.openFirefox();
+		Browser.openChrome();
 		bookingStartPage = Browser.openStartPage(theSiteURL);
 	}
 	
@@ -62,9 +62,16 @@ public class MontenegroHotel {
 	public void checkFreeParking() {
 		hotelMontenegroPage.checkPresenceOfFreeParkingBenefit();
 	}
+	
+	
 	@AfterClass
 	public void tearDown() {
-		Browser.close();
+		//Browser.close();
 	}
 	
+
+	// Додати обробку ексепшина з різним форматом пейджі
+	//  винести Actions в браузер 
+	// Винести парсинг в тулзи
+	// Винести переміщення драйвера в бравзер
 }
