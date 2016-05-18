@@ -47,15 +47,9 @@ public class DestinationTipsPage {
 
 	@Step
 	public void selectLvivRegionFromDropdown() {
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		Actions actions = new Actions(driver);
-		actions.moveToElement(lvivRegion).click().build().perform();
-			}
+		Browser.sleepForMilisecs(4000);
+		Browser.moveToElementAndClick(driver, lvivRegion);
+	}
 	
 	@Step
 	public void clickSearchButton() {

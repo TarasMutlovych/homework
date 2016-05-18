@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -42,4 +43,17 @@ public class Browser {
 	}
 	
 	
+	public static void sleepForMilisecs (int milisecs) {
+		try {
+			Thread.sleep(milisecs);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void moveToElementAndClick (WebDriver driver, WebElement element) {
+		Actions actions = new Actions(driver);
+		actions.moveToElement(element).click().build().perform();
+		
+	}
 }

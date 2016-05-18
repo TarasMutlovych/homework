@@ -23,8 +23,8 @@ public class UserNameVerification {
 
 	@BeforeClass
 	public void setUp() {
-		//Browser.openFirefox();
-		Browser.openChrome();
+		Browser.openFirefox();
+		//Browser.openChrome();
 		bookingStartPage = Browser.openStartPage(theSiteURL);
 	}
 

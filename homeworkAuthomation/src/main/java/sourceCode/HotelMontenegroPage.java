@@ -20,21 +20,21 @@ public class HotelMontenegroPage {
 		PageFactory.initElements(driver, this);
 	}
 	
-	@FindBy (xpath = "//p[@class = 'ph-item']/span[normalize-space(.) = 'Free WiFi']")
+	@FindBy (css = "p.ph-item span.ph-icon-container-wifi + span.ph-item-copy")
 	WebElement freeWiFiBenefit;
 	
-	@FindBy(xpath = "//span[normalize-space(.) = 'Free parking']")
+	@FindBy(css = "p.ph-item span.ph-icon-container-parking + span.ph-item-copy")
 	WebElement freeParkingBenefit;
 	
 	@Step
 	public void checkPresenceOfFreeWiFiBenefit() {
-		//Browser.waitForVisibility(driver, freeWiFiBenefit);
+		Browser.waitForVisibility(driver, freeWiFiBenefit);
 		Assert.assertNotNull(freeWiFiBenefit, "No Free WiFi benefit in this hotel");
 		}
 	
 	@Step
 	public void checkPresenceOfFreeParkingBenefit() {
-		//Browser.waitForVisibility(driver, freeParkingBenefit);
+		Browser.waitForVisibility(driver, freeParkingBenefit);
 		Assert.assertNotNull(freeParkingBenefit, "No Free Parking benefit in this hotel");
 		}
 		

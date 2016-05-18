@@ -49,19 +49,6 @@ public class BookingStartPage extends StartPage {
 			@FindBy(css = "div.sb-calendar__dates.sb-searchbox__clearfix.-interactive") })
 	List<WebElement> dateInputFields;
 
-	@FindBys({
-		@FindBy(css = ""),
-		@FindBy(css = "i.sb-calendar__close.bicon-downchevron")
-	})
-	WebElement checkInCalendarExpandingArrowForm2;
-	
-	@FindBys({
-		@FindBy(css = ""),
-		@FindBy(css = "i.sb-calendar__close.bicon-downchevron")
-	})
-	WebElement checkOutCalendarExpandingArrowForm2;
-	
-	//div[contains(text(), 'Check-in date')][@class = 'sb-calendar__label']/following-sibling::div
 	@FindBy(name = "checkin_monthday")
 	WebElement droplistMonthDay;
 
@@ -75,23 +62,20 @@ public class BookingStartPage extends StartPage {
 	WebElement droplistMonthYearCheckOut;
 
 	@FindBy(css = "div.sb-calendar__dates.sb-searchbox__clearfix.-interactive.-enabled.-outside")
-	List <WebElement> openCalendarForm2;
-	
-	@FindBy(css = "td.c2-day.c2-day-s-in-range.c2-day-s-first-in-range")
-	List <WebElement> checkIn;
-	
-	@FindBy(css = "div[class = 'c2-calendar-viewport'][style = 'height: 198px;'] div[data-id = 'M1464739200000'] tbody td[data-id = '1466553600000']")
-	WebElement checkInDateForm2;
-	
+	List<WebElement> openCalendarForm2;
 
-	@FindBy(css = "div[class = 'c2-calendar-viewport'][style = 'height: 198px;'] div[data-id = 'M1464739200000'] tbody td[data-id = '1467244800000']")
+	@FindBys({
+		@FindBy(css = "div.c2-wrapper-s-checkin div[data-id = 'M1464739200000']"), 
+		@FindBy(css = "td[data-id = '1466553600000']")
+		})
+	WebElement checkInDateForm2;
+
+	@FindBys({
+		@FindBy(css = "div.c2-wrapper-s-checkout div[data-id = 'M1464739200000']"),
+		@FindBy(css = "td[data-id = '1467244800000'") 
+		})
 	WebElement checkOutDateForm2;
-	//@FindBy(xpath = "//input[@name = 'checkin_monthday']")
-	//WebElement checkin_monthdayForm2;
-	
-	//@FindBy(xpath = "//input[@name = 'checkin_year_month']")
-	//WebElement checkin_year_monthForm2;
-	
+
 	@FindBy(id = "frm")
 	WebElement searchForm;
 
@@ -124,11 +108,7 @@ public class BookingStartPage extends StartPage {
 	public void enterHotelName(String hotelName) {
 		Browser.waitForVisibility(driver, searchInputField);
 		searchInputField.sendKeys(hotelName);
-		try {
-			Thread.sleep(4000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		Browser.sleepForMilisecs(2000);
 		Actions actions = new Actions(driver);
 		actions.moveToElement(HotelInAutocompilelist).click().build().perform();
 
@@ -150,7 +130,6 @@ public class BookingStartPage extends StartPage {
 		}
 
 		int dateInputs = dateInputFields.size();
-		System.out.println(dateInputs);
 
 		if (dateInputs == 4) {
 			Select droplistDay = new Select(droplistMonthDay);
@@ -160,31 +139,12 @@ public class BookingStartPage extends StartPage {
 			monthDay = null;
 			monthYear = null;
 		} else {
-			//Browser.waitForVisibility(driver, checkin_monthdayForm2);
-			//checkInCalendarExpandingArrowForm2.click();
-			//checkin_monthdayForm2.clear();
-			//checkin_monthdayForm2.sendKeys("11");
-			//checkin_year_monthForm2.clear();
-			//checkin_year_monthForm2.sendKeys("2016-7");
-			try {
-				Thread.sleep(4000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+			Browser.sleepForMilisecs(2000);
 			WebElement checkInCalendar = openCalendarForm2.get(0);
-			Actions actions = new Actions(driver);
-			actions.moveToElement(checkInCalendar).click().build().perform();
-			
-			//System.out.println("use another locators");
-			try {
-				Thread.sleep(4000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			
-			Actions actions1 = new Actions(driver);
-			actions1.moveToElement(checkInDateForm2).click().build().perform();
-			
+			Browser.moveToElementAndClick(driver, checkInCalendar);
+
+			Browser.sleepForMilisecs(2000);
+			Browser.moveToElementAndClick(driver, checkInDateForm2);
 		}
 	}
 
@@ -201,7 +161,6 @@ public class BookingStartPage extends StartPage {
 		}
 
 		int dateInputs = dateInputFields.size();
-		System.out.println(dateInputs);
 
 		if (dateInputs == 4) {
 			Select droplistDay = new Select(droplistMonthDayCheckOut);
@@ -211,21 +170,11 @@ public class BookingStartPage extends StartPage {
 			monthDay = null;
 			monthYear = null;
 		} else {
-			//Browser.waitForVisibility(driver, checkOutCalendarExpandingArrowForm2);
-			//checkOutCalendarExpandingArrowForm2.click();
-			WebElement checkInCalendar = openCalendarForm2.get(1);
-			
-			Actions actions = new Actions(driver);
-			actions.moveToElement(checkInCalendar).click().build().perform();
-			
-			try {
-				Thread.sleep(4000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			
-			Actions actions1 = new Actions(driver);
-			actions1.moveToElement(checkOutDateForm2).click().build().perform();
+			WebElement checkOutCalendar = openCalendarForm2.get(1);
+			Browser.moveToElementAndClick(driver, checkOutCalendar);
+
+			Browser.sleepForMilisecs(2000);
+			Browser.moveToElementAndClick(driver, checkOutDateForm2);
 		}
 
 	}

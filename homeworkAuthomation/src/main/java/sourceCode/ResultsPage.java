@@ -22,12 +22,11 @@ public class ResultsPage {
 	@FindAll({
 		@FindBy(partialLinkText = "Hotel Montenegro"),
 	@FindBy(xpath = "//p[normalize-space(.) = 'Budva, Budva County, Montenegro']/preceding-sibling::div[normalize-space(.) = 'Hotel Montenegro']/a")
-	
 	})
 	WebElement searchedHotelLink ;
 	
 	@FindAll({
-		@FindBy(xpath = "div[data-hotelid='98157'] a.b-button.b-button_primary.sr_cta_button"),
+		@FindBy(css = "div[data-hotelid='98157'] a.b-button.b-button_primary.sr_cta_button"),
 	@FindBy(xpath = ".//div[@id = 'disambBlock_TOP_N']//div[@class = 'TOP_NWrapper']//a[@data-title = 'Hotel Montenegro, Budva, Budva County, Montenegro']")
 	})	
 	WebElement showPropertiesButton;

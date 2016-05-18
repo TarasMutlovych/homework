@@ -66,12 +66,10 @@ public class MontenegroHotel {
 	
 	@AfterClass
 	public void tearDown() {
-		//Browser.close();
+		Browser.close();
 	}
 	
 
-	// Додати обробку ексепшина з різним форматом пейджі
-	//  винести Actions в браузер 
 	// Винести парсинг в тулзи
 	// Винести переміщення драйвера в бравзер
 }
