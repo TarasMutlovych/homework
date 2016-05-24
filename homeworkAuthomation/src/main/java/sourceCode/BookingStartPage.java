@@ -79,6 +79,9 @@ public class BookingStartPage extends StartPage {
 	@FindBy(id = "frm")
 	WebElement searchForm;
 
+	@FindBy(css = "ul.b-popular_list.lp_endorsements_popular_destinations_container + p > a")
+	WebElement moreDestinatoins;
+	
 	// User First And Last Name Verification
 	private void expandLoginPopUpWindow() {
 		Browser.waitForVisibility(driver, signInButtonOnTheStartScreen);
@@ -183,6 +186,15 @@ public class BookingStartPage extends StartPage {
 	public ResultsPage searchForTheHotel() {
 		searchForm.submit();
 		return new ResultsPage(driver);
+	}
+
+	
+	//Test 5 - Working with Excel file
+	@Step
+	public DestinationsPage clickMoreDestinatons() {
+		Browser.waitForVisibility(driver, moreDestinatoins);
+		moreDestinatoins.click(); 
+		return new DestinationsPage(driver);
 	}
 
 }

@@ -35,6 +35,7 @@ public class UserNameVerification {
 		userProfilePage = bookingStartPage.submitCredentials();
 	}
 
+	
 	@Test(priority = 2)
 	public void verifyUserFirstAndLastName() {
 		userProfilePage.verifyThatUserNameEqualsTo(expectedFirstname);

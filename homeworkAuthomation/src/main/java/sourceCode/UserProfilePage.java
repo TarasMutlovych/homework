@@ -49,6 +49,7 @@ public class UserProfilePage {
 
 	@Step
 	public void clickGetDestinationTipsButton() {
+		// Browser.sleepForMilisecs(5000);
 		getDestinationTipsButton.click();
 	}
 
