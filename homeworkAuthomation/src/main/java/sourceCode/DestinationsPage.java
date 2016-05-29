@@ -3,7 +3,6 @@ package sourceCode;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,12 +16,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import jxl.Workbook;
-import jxl.read.biff.BiffException;
-import jxl.write.WritableSheet;
-import jxl.write.WritableWorkbook;
-import jxl.write.WriteException;
-import jxl.write.biff.RowsExceededException;
 import libraries.Browser;
 import ru.yandex.qatools.allure.annotations.Step;
 
@@ -60,7 +53,16 @@ public class DestinationsPage {
 			cities.add(i, city);
 		}
 
-		File fExcel = new File("C:\\Users\\User-PC\\git\\City.xlsx");
+		//File fExcel = new File("C:\\Users\\User-PC\\git\\City.xlsx");
+		File fExcel = new File("C:\\Users\\User-PC\\git\\Cities.xlsx");
+        
+		try{
+	         fExcel .createNewFile();
+	         //f.delete();     
+	      }catch(Exception e){
+	         e.printStackTrace();
+	      }
+				
 		/*
 		 * FileInputStream fis = new FileInputStream(fExcel); XSSFWorkbook wb =
 		 * new XSSFWorkbook(fis); XSSFSheet sheet1 = wb.getSheet("Data"); /*
