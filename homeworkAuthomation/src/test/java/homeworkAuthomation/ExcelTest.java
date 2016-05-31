@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 import jxl.write.WriteException;
 import jxl.write.biff.RowsExceededException;
 import libraries.Browser;
+import libraries.Tools;
 import sourceCode.BookingStartPage;
 import sourceCode.DestinationsPage;
 
@@ -18,6 +19,8 @@ public class ExcelTest {
 	DestinationsPage destinationsPage;
 	
 	private String theSiteURL = "http://www.booking.com/";
+	private String fileDestination = "C:\\Users\\User-PC\\git";
+	private String fileName = "Cities.xlsx";
 	
 	@BeforeClass
 	public void setUp() {
@@ -30,12 +33,13 @@ public class ExcelTest {
 	public void openDestinationsPage() throws Exception {
 		destinationsPage = bookingStartPage.clickMoreDestinatons();
 		destinationsPage.clickdestinationsCities();
-		destinationsPage.verifyCitiesNumber();
+		destinationsPage.verifyNumberOfCities(fileDestination, fileName);
 	}
 	
 	@AfterClass
 	public void tearDown() {
 		Browser.close();
+		//Tools.deleteTheFile(fileDestination, fileName);
 	}
 	
 }

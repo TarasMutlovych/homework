@@ -17,6 +17,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import libraries.Browser;
+import libraries.Tools;
 import ru.yandex.qatools.allure.annotations.Step;
 
 public class DestinationsPage {
@@ -41,7 +42,7 @@ public class DestinationsPage {
 	}
 
 	@Step
-	public void verifyCitiesNumber() throws Exception {
+	public void verifyNumberOfCities (String fileDestination, String fileName) throws Exception {
 		WebDriverWait wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.visibilityOfAllElements(foundCities));
 		
@@ -52,43 +53,13 @@ public class DestinationsPage {
 			String city = foundCities.get(i).getText();
 			cities.add(i, city);
 		}
-
-		//File fExcel = new File("C:\\Users\\User-PC\\git\\City.xlsx");
-		File fExcel = new File("C:\\Users\\User-PC\\git\\Cities.xlsx");
-        
-		try{
-	         fExcel .createNewFile();
-	         //f.delete();     
-	      }catch(Exception e){
-	         e.printStackTrace();
-	      }
 				
-		/*
-		 * FileInputStream fis = new FileInputStream(fExcel); XSSFWorkbook wb =
-		 * new XSSFWorkbook(fis); XSSFSheet sheet1 = wb.getSheet("Data"); /*
-		 * sheet1.createRow(0).createCell(0).setCellValue("Cities");
-		 * FileOutputStream fos = new FileOutputStream(fExcel); wb.write(fos);
-		 */
-		for (int i = 0; i < size; i++) {
-			String cityToWrite = cities.get(i);
-			FileInputStream fis = new FileInputStream(fExcel);
-			XSSFWorkbook wb = new XSSFWorkbook(fis);
-			XSSFSheet sheet1 = wb.getSheetAt(0);
-			sheet1.createRow(i).createCell(0).setCellValue(cityToWrite);
-			FileOutputStream fos = new FileOutputStream(fExcel);
-			wb.write(fos);
-			wb.close();
-		}
+		Tools.createExcelAndWrite(fileDestination, fileName, cities);
 
-		FileInputStream fis = new FileInputStream(fExcel);
-		XSSFWorkbook wb = new XSSFWorkbook(fis);
-		XSSFSheet sheet1 = wb.getSheetAt(0);
-
-		int rowNum = sheet1.getLastRowNum();
-		int cityQuantityFromExcel = rowNum + 1;
+		int cityQuantityFromExcel = Tools.getNumberOfFilledExcellRows(fileDestination, fileName);
+		
 		int cityQuantityFromCite = size;
 		Assert.assertEquals(cityQuantityFromExcel, cityQuantityFromCite, "The quantity of Hotels is not the same");
-
 	}
 
 }
