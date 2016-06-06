@@ -14,10 +14,12 @@ import org.openqa.selenium.support.ui.Select;
 import libraries.Browser;
 import ru.yandex.qatools.allure.annotations.Step;
 
-public class BookingStartPage extends StartPage {
+public class BookingStartPage {
 
+	private static WebDriver driver;
+	
 	public BookingStartPage(WebDriver driver) {
-		super(driver);
+		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
 

@@ -23,6 +23,21 @@ public class IndustrialAllianceStartPage {
 	@FindBy(css = "li.dropdown.Pret.three-items.open ul.dropdown-menu.dropdown-menu-large ul.mega-menu-content a[ data-utag-name='mortgage_loan']")
 	WebElement mortgagesButton;
 	
+	@FindBy (css = "a[data-language = 'en'][data-utag-pos = 'header']")
+	WebElement changeLanguageEnButton;
+	
+	public void verifyTheLanguage (String option) {
+		String [] inputOptionsEn = {"Monthly", "Biweekly", "Biweekly +", "weekly", "weekly +"};
+		
+		for (int i = 0; i < 4; i++) {
+			if (option == inputOptionsEn[i]) {
+				Browser.waitForVisibility(driver, changeLanguageEnButton);
+				Browser.moveToElementAndClick(driver, changeLanguageEnButton);
+			}
+		}
+	}
+	
+	
 	@Step
 	public void clickLoansButton () {
 		Browser.waitForVisibility(driver, loansButton);

@@ -1,7 +1,6 @@
 package libraries;
 
-import javax.swing.Action;
-
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -75,9 +74,15 @@ public class Browser {
 	public static void moveSliderToRight(WebDriver driver, WebElement element, int sliderPoints) {
 		Actions actions = new Actions(driver);
 		actions.dragAndDropBy(element, sliderPoints, 0).build().perform();
-		
-		//Action action = (Action) move.dragAndDropBy(element, 30, 0).build();
-		//action.p;
-	   // Action action = (Action) move.dragAndDropBy(slider, 30, 0)
+		}
+	
+	public static void scrollThePageDown (WebDriver driver) {
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript("window.scrollBy(0, 800)", "");
+	}
+	
+	public static void scrollThePageUp (WebDriver driver) {
+		JavascriptExecutor jse = (JavascriptExecutor)driver;
+		jse.executeScript("window.scrollBy(0, -700)", "");
 	}
 }

@@ -30,12 +30,10 @@ public class PropertiesListPage {
 		// Switching driver
 		String homePage = driver.getWindowHandle();
 		Set<String> windows = driver.getWindowHandles();
-		String currentWindowID;
 		for (String windowID : windows) {
-			currentWindowID = windowID;
-			if (!currentWindowID.equalsIgnoreCase(homePage)){
+			if (!windowID.equalsIgnoreCase(homePage)){
 				driver.close();
-				driver.switchTo().window(currentWindowID);
+				driver.switchTo().window(windowID);
 			}
 		}
 		return new HotelMontenegroPage(driver);

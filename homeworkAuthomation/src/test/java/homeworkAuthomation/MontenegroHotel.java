@@ -66,10 +66,7 @@ public class MontenegroHotel {
 	
 	@AfterClass
 	public void tearDown() {
-		Browser.close();
+		//Browser.close();
 	}
 	
-
-	// Винести парсинг в тулзи
-	// Винести переміщення драйвера в бравзер
 }

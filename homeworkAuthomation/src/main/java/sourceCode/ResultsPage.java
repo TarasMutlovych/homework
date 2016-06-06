@@ -26,7 +26,7 @@ public class ResultsPage {
 	WebElement searchedHotelLink ;
 	
 	@FindAll({
-		@FindBy(css = "div[data-hotelid='98157'] a.b-button.b-button_primary.sr_cta_button"),
+		@FindBy(css = "div[data-hotelid='98157'] a.hotel_name_link.url"),
 	@FindBy(xpath = ".//div[@id = 'disambBlock_TOP_N']//div[@class = 'TOP_NWrapper']//a[@data-title = 'Hotel Montenegro, Budva, Budva County, Montenegro']")
 	})	
 	WebElement showPropertiesButton;

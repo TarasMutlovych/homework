@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 
 public class Tools  {
 
@@ -59,4 +61,9 @@ public class Tools  {
 		fExcel.delete();
 	}
 
+	public static void selectOptionFromDroplist (WebElement droplist, String option) {
+		Select droplist1 = new Select(droplist);
+		droplist1.selectByValue(option);
+		
+	}
 }

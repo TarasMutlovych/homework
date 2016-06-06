@@ -20,10 +20,19 @@ public class MortgagePage {
 
 	@FindBy(css = "div.light-grey-tiles.tile-icon.icone-calculateur a[data-utag-name='calculate_your_payments']")
 	WebElement calculateYourPaymentsButton;
+	
+	@FindBy(css = "button.fermer")
+	WebElement closePopUp;
 
 	@Step
 	public MortgagePaymentCalculatorPage clickCalculateYourPaymentsButton () {
+		//Browser.waitForVisibility(driver, calculateYourPaymentsButton);
+		//if (closePopUp != null) {
+		//	Browser.moveToElementAndClick(driver, closePopUp);
+		//}
+		Browser.scrollThePageDown(driver);
 		Browser.waitForVisibility(driver, calculateYourPaymentsButton);
+		//Browser.moveToElementAndClick(driver, calculateYourPaymentsButton);
 		calculateYourPaymentsButton.click();
 		return new MortgagePaymentCalculatorPage(driver);
 	}
