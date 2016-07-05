@@ -32,7 +32,7 @@ public class MontenegroHotel {
 	@BeforeClass
 	public void setUp() {
 		browser = Browser.openFirefox();
-		//Browser.openChrome();
+		//browser = Browser.openChrome();
 		bookingStartPage = BookingStartPage.openStartPage(browser, theSiteURL);
 	}
 	
