@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 import libraries.Browser;
 import ru.yandex.qatools.allure.annotations.Step;
@@ -36,7 +37,7 @@ public class IndustrialAllianceStartPage {
 		Browser.waitForVisibility(driver, changeLanguageEnButton);
 		String languageToChange = changeLanguageEnButton.getText();
 		System.out.println(languageToChange);
-		if (languageToChange == language) {
+		if (languageToChange.equals(language)) {
 			Browser.moveToElementAndClick(driver, changeLanguageEnButton);
 		}
 	}

@@ -19,6 +19,7 @@ public class FinGroupiACiteTest {
 	MortgagePaymentCalculatorPage mortgagePaymentCalculator;
 
 	private String theSiteURL = "http://www.ia.ca/";
+	//private String language = "FR";
 	private String language = "EN";
 	private int pointsToMovePurchasePriceSlider = 60;
 	private int desiredPurchasePrice = 500000;
@@ -30,8 +31,8 @@ public class FinGroupiACiteTest {
 
 	@BeforeClass
 	public void setUp() {
-		//browser = Browser.openChrome();
-		browser = Browser.openFirefox();
+		browser = Browser.openChrome();
+		//browser = Browser.openFirefox();
 		industrialAllianceStartPage = IndustrialAllianceStartPage.openStartPage(browser, theSiteURL);
 		industrialAllianceStartPage.verifyTheLanguage(language);
 	}
