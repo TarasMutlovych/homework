@@ -1,5 +1,6 @@
 package homeworkAuthomation;
 
+import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -12,6 +13,8 @@ import sourceCode.ResultsPage;
 
 public class MontenegroHotel {
 
+	private WebDriver browser;
+	
 	BookingStartPage bookingStartPage;
 	ResultsPage resultsPage;
 	PropertiesListPage propertiesListPage;
@@ -28,9 +31,9 @@ public class MontenegroHotel {
 
 	@BeforeClass
 	public void setUp() {
-		//Browser.openFirefox();
-		Browser.openChrome();
-		bookingStartPage = Browser.openStartPage(theSiteURL);
+		browser = Browser.openFirefox();
+		//Browser.openChrome();
+		bookingStartPage = BookingStartPage.openStartPage(browser, theSiteURL);
 	}
 	
 	@Test

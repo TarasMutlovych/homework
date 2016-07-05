@@ -2,6 +2,7 @@ package homeworkAuthomation;
 
 import java.io.IOException;
 
+import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -15,6 +16,7 @@ import sourceCode.DestinationsPage;
 
 public class ExcelTest {
 
+	private WebDriver browser;
 	BookingStartPage bookingStartPage;
 	DestinationsPage destinationsPage;
 	
@@ -24,9 +26,9 @@ public class ExcelTest {
 	
 	@BeforeClass
 	public void setUp() {
-		Browser.openFirefox();
+		browser = Browser.openFirefox();
 		//Browser.openChrome();
-		bookingStartPage = Browser.openStartPage(theSiteURL);
+		bookingStartPage = BookingStartPage.openStartPage(browser, theSiteURL);
 	}
 	
 	@Test

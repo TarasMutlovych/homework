@@ -10,20 +10,27 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import sourceCode.BookingStartPage;
-import sourceCode.IndustrialAllianceStartPage;
 import sourceCode.StartPage;
 
 public class Browser {
 
 	private static WebDriver driver;
 	
-	public static StartPage openFirefox() {
+	public static WebDriver openFirefox() {
 		driver = new FirefoxDriver();
 		driver.manage().window().maximize();
-		return new StartPage(driver);
+		return driver;
 	}
 	
-	public static StartPage openChrome() {
+	public static WebDriver openChrome() {
+		//System.setProperty("webdriver.chrome.driver", localRootDir.getAbsolutePath() + "\\\\Libs\\\\chromedriver.exe"); // хромдрайвер у меня лежит в проекте в папочке Libs
+		
+		driver = new FirefoxDriver();
+		driver.manage().window().maximize();
+		return driver;
+	}
+		
+	public static StartPage openChrome23() {
 		System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\Java\\chromedriver.exe");
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
@@ -36,12 +43,6 @@ public class Browser {
 		driver.manage().window().maximize();
 	}
 	
-	public static IndustrialAllianceStartPage openStartPage1(String theSiteURL) {
-		driver.get(theSiteURL);
-		return new IndustrialAllianceStartPage (driver);
-	}
-	
-	
 	public static void close() {
 		driver.close();
 	}
@@ -50,13 +51,6 @@ public class Browser {
 		WebDriverWait wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.visibilityOf(elment));
 	}
-	
-	public static BookingStartPage openStartPage(String theSite) {
-		driver.get(theSite);
-		return new BookingStartPage(driver);
-	}
-	
-	
 	
 	public static void sleepForMilisecs (int milisecs) {
 		try {

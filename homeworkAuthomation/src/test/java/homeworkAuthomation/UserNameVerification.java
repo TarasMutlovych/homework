@@ -1,5 +1,6 @@
 package homeworkAuthomation;
 
+import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -11,6 +12,9 @@ import sourceCode.UserProfilePage;
 
 public class UserNameVerification {
 
+	private WebDriver browser;
+	
+	
 	BookingStartPage bookingStartPage;
 	UserProfilePage userProfilePage;
 	DestinationTipsPage destinationTipsPage;
@@ -23,9 +27,9 @@ public class UserNameVerification {
 
 	@BeforeClass
 	public void setUp() {
-		Browser.openFirefox();
+		browser = Browser.openFirefox();
 		//Browser.openChrome();
-		bookingStartPage = Browser.openStartPage(theSiteURL);
+		bookingStartPage = BookingStartPage.openStartPage(browser, theSiteURL);
 	}
 
 	@Test(priority = 1)

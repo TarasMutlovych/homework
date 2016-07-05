@@ -84,6 +84,13 @@ public class BookingStartPage {
 	@FindBy(css = "ul.b-popular_list.lp_endorsements_popular_destinations_container + p > a")
 	WebElement moreDestinatoins;
 	
+
+	public static BookingStartPage openStartPage(WebDriver browser, String theSiteURL) {
+		browser.get(theSiteURL);
+		return new BookingStartPage (browser);
+	}
+
+	
 	// User First And Last Name Verification
 	private void expandLoginPopUpWindow() {
 		Browser.waitForVisibility(driver, signInButtonOnTheStartScreen);

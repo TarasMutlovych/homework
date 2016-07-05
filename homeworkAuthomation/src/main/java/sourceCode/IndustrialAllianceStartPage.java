@@ -26,6 +26,13 @@ public class IndustrialAllianceStartPage {
 	@FindBy (css = "a[data-language = 'en'][data-utag-pos = 'header']")
 	WebElement changeLanguageEnButton;
 	
+
+	public static IndustrialAllianceStartPage openStartPage(WebDriver browser, String theSiteURL) {
+		browser.get(theSiteURL);
+		return new IndustrialAllianceStartPage (browser);
+	}
+
+	
 	public void verifyTheLanguage (String option) {
 		String [] inputOptionsEn = {"Monthly", "Biweekly", "Biweekly +", "weekly", "weekly +"};
 		
@@ -50,4 +57,5 @@ public class IndustrialAllianceStartPage {
 		Browser.moveToElementAndClick(driver, mortgagesButton);
 		return new MortgagePage(driver);
 	}
+
 }

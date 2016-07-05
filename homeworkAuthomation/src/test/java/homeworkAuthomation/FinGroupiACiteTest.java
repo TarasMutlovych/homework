@@ -1,5 +1,6 @@
 package homeworkAuthomation;
 
+import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -12,6 +13,7 @@ import sourceCode.MortgagePaymentCalculatorPage;
 
 public class FinGroupiACiteTest {
 
+	private WebDriver browser;
 	IndustrialAllianceStartPage industrialAllianceStartPage;
 	MortgagePage mortgagePage;
 	MortgagePaymentCalculatorPage mortgagePaymentCalculator;
@@ -24,12 +26,12 @@ public class FinGroupiACiteTest {
 	private String paymentFrequency = "weekly";
 	private String desiredRate = "5";
 	private String expectedPayments = "$ 836.75";
-
+	
 	@BeforeClass
 	public void setUp() {
-		//Browser.openFirefox();
-		Browser.openChrome1();
-		industrialAllianceStartPage = Browser.openStartPage1(theSiteURL);
+		//Browser.openChrome1();
+		browser = Browser.openFirefox();
+		industrialAllianceStartPage = IndustrialAllianceStartPage.openStartPage(browser, theSiteURL);
 		industrialAllianceStartPage.verifyTheLanguage(paymentFrequency);
 	}
 
