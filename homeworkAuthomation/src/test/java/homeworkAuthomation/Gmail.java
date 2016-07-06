@@ -25,10 +25,13 @@ public class Gmail {
 		senderMailBox = SenderMailBox.openTheLogInPage(browser, URL);
 	}
 	
-	@Test
-	public void setLetter() {
+	@Test (priority = 1)
+	public void sendLetter() {
 		senderMailBox.logIntoTheMailBox(senderEmail, senderPass);
 		senderMailBox.createAndSentLetted(recipientEmail, letterSubject, letterBody);
+		senderMailBox.verifyThatLetterIsSent(letterBody);
 	}
+	
+	
 	
 }

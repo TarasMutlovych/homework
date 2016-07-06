@@ -10,6 +10,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 import libraries.Browser;
 
@@ -52,6 +53,12 @@ public class SenderMailBox {
 	@FindBy(xpath = "//div[@data-tooltip = 'Send ‪(Ctrl-Enter)‬']")
 	WebElement sendLetterButton;
 
+	@FindBy(css = "div[role = 'navigation'] a[title = 'Sent Mail']")
+	WebElement sentMailButton;
+	
+	@FindBy (xpath = "//span[contains(text(), 'letterBody')]")
+	WebElement letterwithSentBody;
+
 	public static SenderMailBox openTheLogInPage(WebDriver driver, String URL) {
 		driver.get(URL);
 		return new SenderMailBox(driver);
@@ -82,8 +89,8 @@ public class SenderMailBox {
 		String userDir = System.getProperty("user.dir");
 		String pathToFile = userDir + "\\testware\\files\\test.jpg";
 		StringSelection ss = new StringSelection(pathToFile);
-	     Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
-		
+		Toolkit.getDefaultToolkit().getSystemClipboard().setContents(ss, null);
+
 		Robot robot = null;
 		try {
 			robot = new Robot();
@@ -91,7 +98,7 @@ public class SenderMailBox {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//Thread.sleep(5000);
+		// Thread.sleep(5000);
 		// robot.
 		robot.keyPress(KeyEvent.VK_CONTROL);
 		robot.keyPress(KeyEvent.VK_V);
@@ -102,5 +109,11 @@ public class SenderMailBox {
 		robot.keyRelease(KeyEvent.VK_ENTER);
 
 		sendLetterButton.click();
+	}
+
+	public void verifyThatLetterIsSent(String letterBody) {
+		Browser.sleepForMilisecs(3000);
+		Browser.moveToElementAndClick(driver, sentMailButton);
+		Assert.assertNotNull(letterwithSentBody);
 	}
 }
