@@ -206,6 +206,9 @@ public class MortgagePaymentCalculatorPage {
 	@Step
 	public String getPayments() {
 		Browser.waitForVisibility(driver, payments);
-		return payments.getText();
+		String str = payments.getText();
+		str = str.replaceAll("[$]|\\s", "");
+		str = str.replaceAll("[,]", ".");
+		return str;
 	}
 }

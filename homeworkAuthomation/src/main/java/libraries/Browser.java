@@ -1,21 +1,36 @@
 package libraries;
 
+import java.io.File;
+
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import sourceCode.StartPage;
 
 public class Browser {
 
 	private static WebDriver driver;
 
 	public static WebDriver openFirefox() {
+/*	String userDir = System.getProperty("user.dir");
+		String pathToFireFoxdriver = userDir + "\\testware\\browsers\\Firefox4601.exe";
+		System.setProperty("webdriver.firefox.exe",pathToFireFoxdriver);
+		WebDriver driver=new  FirefoxDriver();
+		 
+		String pathToFireFoxdriver = "C:\\Users\\Mozilla Firefox47\\firefox.exe";
+		//String pathToFireFoxdriver = "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe";
+		File pathToBinary = new File(pathToFireFoxdriver);
+		FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
+		FirefoxProfile firefoxProfile = new FirefoxProfile();       
+		driver = new FirefoxDriver(ffBinary,firefoxProfile);
+*/
+		
 		driver = new FirefoxDriver();
 		driver.manage().window().maximize();
 		return driver;

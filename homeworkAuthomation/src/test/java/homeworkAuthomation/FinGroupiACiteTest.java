@@ -19,15 +19,15 @@ public class FinGroupiACiteTest {
 	MortgagePaymentCalculatorPage mortgagePaymentCalculator;
 
 	private String theSiteURL = "http://www.ia.ca/";
-	//private String language = "FR";
-	private String language = "EN";
+	private String language = "FR";
+	//private String language = "EN";
 	private int pointsToMovePurchasePriceSlider = 60;
 	private int desiredPurchasePrice = 500000;
 	private int desiredDownPayment = 50000;
 	private String amortization = "15";
 	private String paymentFrequency = "weekly";
 	private String desiredRate = "5";
-	private String expectedPayments = "$ 836.75";
+	private String expectedPayments = "836.75";
 
 	@BeforeClass
 	public void setUp() {
@@ -38,62 +38,27 @@ public class FinGroupiACiteTest {
 	}
 
 	@Test(priority = 1)
-	public void openLoansDropdown() {
+	public void openMortgagePaymentCalculatorPage() {
 		industrialAllianceStartPage.clickLoansButton();
-	}
-
-	@Test(priority = 2)
-	public void clickMortagesButton() {
 		mortgagePage = industrialAllianceStartPage.clickMortagesButton();
-	}
-
-	@Test(priority = 3)
-	public void clickCalculateYourPayments() {
 		mortgagePaymentCalculator = mortgagePage.clickCalculateYourPaymentsButton();
 	}
 
-	@Test(priority = 4)
-	public void moveSliiderToTheRight() {
+	@Test(priority = 2)
+	public void verifyTheSliderMoving() {
 		mortgagePaymentCalculator.moveSlider(pointsToMovePurchasePriceSlider);
-	}
-
-	@Test(priority = 5)
-	public void verifySliderMoving() {
 		mortgagePaymentCalculator.verifyTheSliderMoving();
 	}
 
-	@Test(priority = 6)
-	public void changePurchasePrice() {
-		mortgagePaymentCalculator.changePurchasePrice(desiredPurchasePrice);
-	}
-
-	@Test(priority = 7)
-	public void changeDownPayment() {
-		mortgagePaymentCalculator.changeDownPayment(desiredDownPayment);
-	}
-
-	@Test(priority = 8)
-	public void selectAmortization() {
-		mortgagePaymentCalculator.selectAmortizaion(amortization);
-	}
-
-	@Test(priority = 9)
-	public void selectPaymentFrequency() {
-		mortgagePaymentCalculator.selectPaymentFrequency(paymentFrequency);
-	}
-
-	@Test(priority = 10)
-	public void changeInterestRate() {
-		mortgagePaymentCalculator.changeInterestRate(desiredRate);
-	}
-
-	@Test(priority = 11)
-	public void calculate() {
-		mortgagePaymentCalculator.calculate();
-	}
-
-	@Test(priority = 12)
+	@Test(priority = 3)
 	public void verifyThePayments() {
+		mortgagePaymentCalculator.changePurchasePrice(desiredPurchasePrice);
+		mortgagePaymentCalculator.changeDownPayment(desiredDownPayment);
+		mortgagePaymentCalculator.selectAmortizaion(amortization);
+		mortgagePaymentCalculator.selectPaymentFrequency(paymentFrequency);
+		mortgagePaymentCalculator.changeInterestRate(desiredRate);
+		mortgagePaymentCalculator.calculate();
+	
 		Assert.assertEquals(mortgagePaymentCalculator.getPayments(), expectedPayments,
 				"The payments are not as expected");
 	}
