@@ -1,14 +1,13 @@
 package libraries;
 
-import java.io.File;
+
+import java.util.List;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -53,6 +52,16 @@ public class Browser {
 	public static void waitForVisibility(WebDriver driver, WebElement elment) {
 		WebDriverWait wait = new WebDriverWait(driver, 10);
 		wait.until(ExpectedConditions.visibilityOf(elment));
+	}
+
+	public static void waitForElementToBeClickable(WebDriver driver, WebElement element) {
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.elementToBeClickable(element));
+	}
+	
+	public static void waitForInvisibilityOFElements(WebDriver driver, List <WebElement> elements) {
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions.invisibilityOfAllElements(elements));
 	}
 
 	public static void sleepForMilisecs(int milisecs) {

@@ -5,13 +5,13 @@ import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.Assert;
 
 import libraries.Browser;
 
@@ -63,6 +63,9 @@ public class SenderMailBox {
 	@FindBy(xpath = "//a[@href = 'https://accounts.google.com/AddSession?hl=en&continue=https://mail.google.com/mail&service=mail']")
 	WebElement addAccountButton;
 
+	@FindBy (css = "div[role='progressbar']")
+	List<WebElement> attachmentLoadingProgressBar;
+	
 	public static SenderMailBox openTheLogInPage(WebDriver driver, String URL) {
 		driver.get(URL);
 		return new SenderMailBox(driver);
@@ -111,6 +114,7 @@ public class SenderMailBox {
 		robot.keyPress(KeyEvent.VK_ENTER);
 		robot.keyRelease(KeyEvent.VK_ENTER);
 
+		Browser.waitForInvisibilityOFElements(driver, attachmentLoadingProgressBar);
 		sendLetterButton.click();
 	}
 
@@ -119,7 +123,8 @@ public class SenderMailBox {
 	}
 
 	public void verifyThatLetterIsPresent(String subject) {
-		Browser.waitForVisibility(driver, driver.findElement(By.xpath("//span[contains(text(),'" + subject + "')]")));
+		
+		Browser.waitForElementToBeClickable(driver, driver.findElement(By.xpath("//span[contains(text(),'" + subject + "')]")));
 	}
 
 	public RecipientMailBox addNewAccount() {

@@ -24,8 +24,8 @@ public class Gmail {
 	
 	@BeforeClass
 	public void setUp() {
-		//browser = Browser.openChrome();
-		browser = Browser.openFirefox();
+		browser = Browser.openChrome();
+		//browser = Browser.openFirefox();
 		senderMailBox = SenderMailBox.openTheLogInPage(browser, URL);
 	}
 	
