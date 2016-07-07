@@ -1,10 +1,12 @@
 package homeworkAuthomation;
 
 import org.openqa.selenium.WebDriver;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import libraries.Browser;
+import sourceCode.RecipientMailBox;
 import sourceCode.SenderMailBox;
 
 public class Gmail {
@@ -16,22 +18,38 @@ public class Gmail {
 	private String letterSubject = "You will never guess";
 	private String letterBody = "You will never guess what is inside";
 	SenderMailBox senderMailBox;
+	RecipientMailBox recipientMailBox;
 	private String recipientEmail = "tarasmytlovych@gmail.com";
-	private	String recipientpass = "";
+	private	String recipientPass = "dominic001";
 	
 	@BeforeClass
 	public void setUp() {
-		browser = Browser.openChrome();
+		//browser = Browser.openChrome();
+		browser = Browser.openFirefox();
 		senderMailBox = SenderMailBox.openTheLogInPage(browser, URL);
 	}
 	
 	@Test (priority = 1)
 	public void sendLetter() {
+		senderMailBox.clickSignInBUtton();
 		senderMailBox.logIntoTheMailBox(senderEmail, senderPass);
 		senderMailBox.createAndSentLetted(recipientEmail, letterSubject, letterBody);
-		senderMailBox.verifyThatLetterIsSent(letterBody);
+		senderMailBox.openSentMail();
+		senderMailBox.verifyThatLetterIsPresent(letterSubject);
 	}
 	
+	@Test (priority = 2) 
+	public void verifyReceivingEmail() {
+		recipientMailBox = senderMailBox.addNewAccount();
+		recipientMailBox.logIntoTheMailbox(recipientEmail, recipientPass);
+		recipientMailBox.verifyTheLetterArrives(letterSubject);
+	}
+	
+	@AfterClass
+	public void tearDown() {
+		//Browser.close();
+	}
+
 	
 	
 }

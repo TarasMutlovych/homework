@@ -6,6 +6,7 @@ import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -55,18 +56,24 @@ public class SenderMailBox {
 
 	@FindBy(css = "div[role = 'navigation'] a[title = 'Sent Mail']")
 	WebElement sentMailButton;
-	
-	@FindBy (xpath = "//span[contains(text(), 'letterBody')]")
-	WebElement letterwithSentBody;
+
+	@FindBy(xpath = "//a[contains(@title, 'Google Account')]")
+	WebElement googleAccountButton;
+
+	@FindBy(xpath = "//a[@href = 'https://accounts.google.com/AddSession?hl=en&continue=https://mail.google.com/mail&service=mail']")
+	WebElement addAccountButton;
 
 	public static SenderMailBox openTheLogInPage(WebDriver driver, String URL) {
 		driver.get(URL);
 		return new SenderMailBox(driver);
 	}
 
-	public void logIntoTheMailBox(String email, String pass) {
+	public void clickSignInBUtton() {
 		Browser.waitForVisibility(driver, signInButton);
 		signInButton.click();
+	}
+
+	public void logIntoTheMailBox(String email, String pass) {
 		Browser.waitForVisibility(driver, emailField);
 		emailField.sendKeys(email);
 		submitCredential.submit();
@@ -95,25 +102,29 @@ public class SenderMailBox {
 		try {
 			robot = new Robot();
 		} catch (AWTException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		// Thread.sleep(5000);
-		// robot.
 		robot.keyPress(KeyEvent.VK_CONTROL);
 		robot.keyPress(KeyEvent.VK_V);
 		robot.keyRelease(KeyEvent.VK_CONTROL);
 		robot.keyRelease(KeyEvent.VK_V);
-		// Thread.sleep(6000);
 		robot.keyPress(KeyEvent.VK_ENTER);
 		robot.keyRelease(KeyEvent.VK_ENTER);
 
 		sendLetterButton.click();
 	}
 
-	public void verifyThatLetterIsSent(String letterBody) {
-		Browser.sleepForMilisecs(3000);
+	public void openSentMail() {
 		Browser.moveToElementAndClick(driver, sentMailButton);
-		Assert.assertNotNull(letterwithSentBody);
+	}
+
+	public void verifyThatLetterIsPresent(String subject) {
+		Browser.waitForVisibility(driver, driver.findElement(By.xpath("//span[contains(text(),'" + subject + "')]")));
+	}
+
+	public RecipientMailBox addNewAccount() {
+		googleAccountButton.click();
+		addAccountButton.click();
+		return new RecipientMailBox(driver);
 	}
 }
