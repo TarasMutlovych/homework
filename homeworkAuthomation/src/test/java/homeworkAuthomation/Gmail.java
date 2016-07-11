@@ -15,8 +15,8 @@ public class Gmail {
 	private String URL = "https://www.google.com/intl/en/mail/help/about.html";
 	private String senderEmail = "testqwerty1970@gmail.com";
 	private String senderPass = "123456789QW";
-	private String letterSubject = "You will never guess";
-	private String letterBody = "You will never guess what is inside";
+	private String letterSubject = "Suppose the final test";
+	private String letterBody = "Just the body";
 	SenderMailBox senderMailBox;
 	RecipientMailBox recipientMailBox;
 	private String recipientEmail = "tarasmytlovych@gmail.com";
@@ -36,6 +36,7 @@ public class Gmail {
 		senderMailBox.createAndSentLetted(recipientEmail, letterSubject, letterBody);
 		senderMailBox.openSentMail();
 		senderMailBox.verifyThatLetterIsPresent(letterSubject);
+		senderMailBox.verifyThatAttachmentisInTheLetter();
 	}
 	
 	@Test (priority = 2) 
@@ -47,7 +48,7 @@ public class Gmail {
 	
 	@AfterClass
 	public void tearDown() {
-		//Browser.close();
+		Browser.close();
 	}
 
 	

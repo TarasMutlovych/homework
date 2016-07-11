@@ -37,18 +37,14 @@ public class UserNameVerification {
 		bookingStartPage.enterLogin(login);
 		bookingStartPage.enterPassword(pass);
 		userProfilePage = bookingStartPage.submitCredentials();
-	}
-
 	
-	@Test(priority = 2)
-	public void verifyUserFirstAndLastName() {
 		userProfilePage.verifyThatUserNameEqualsTo(expectedFirstname);
 		userProfilePage.verifyThatUserSurnameEqualsTo(expectedLastName);
 	}
 	
 	//Lviv region, Ukraine
 	
-	@Test(priority = 3)
+	@Test(priority = 2)
 	public void openDestinationTipsPage() {
 		userProfilePage.clickGetDestinationTipsButton();
 		destinationTipsPage = userProfilePage.clickStartExploringButton();
@@ -59,10 +55,7 @@ public class UserNameVerification {
 		destinationTipsPage.enterLvivIntoSearch("Lviv");
 		destinationTipsPage.selectLvivRegionFromDropdown();
 		destinationTipsPage.clickSearchButton();
-	}
 	
-	@Test(priority = 5)
-	public void verifyThatDestinationsArePresent() {
 		destinationTipsPage.verifyThePresensOfResults();
 	}
 	

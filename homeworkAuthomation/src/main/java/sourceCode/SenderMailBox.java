@@ -12,6 +12,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import libraries.Browser;
 
@@ -63,8 +66,14 @@ public class SenderMailBox {
 	@FindBy(xpath = "//a[@href = 'https://accounts.google.com/AddSession?hl=en&continue=https://mail.google.com/mail&service=mail']")
 	WebElement addAccountButton;
 
-	@FindBy (css = "div[role='progressbar']")
+	@FindBy(css = "div[role='progressbar']")
 	List<WebElement> attachmentLoadingProgressBar;
+
+	@FindBy (css = "span[role = 'link'][id = 'link_vsm']")
+	WebElement messageHaveBeenSentMessage;
+	
+	@FindBy (xpath = "//a[@role = 'link']")
+	WebElement attachmentInTheLetter;
 	
 	public static SenderMailBox openTheLogInPage(WebDriver driver, String URL) {
 		driver.get(URL);
@@ -119,12 +128,21 @@ public class SenderMailBox {
 	}
 
 	public void openSentMail() {
+
+		Browser.waitForVisibility(driver, messageHaveBeenSentMessage);
 		Browser.moveToElementAndClick(driver, sentMailButton);
 	}
 
 	public void verifyThatLetterIsPresent(String subject) {
-		
-		Browser.waitForElementToBeClickable(driver, driver.findElement(By.xpath("//span[contains(text(),'" + subject + "')]")));
+		WebDriverWait wait = new WebDriverWait(driver, 15);
+		wait.until(ExpectedConditions
+				.presenceOfAllElementsLocatedBy(By.xpath("//span[contains(text(),'" + subject + "')]")));
+	driver.findElement(By.xpath("//span[contains(text(),'" + subject + "')]")).click();
+	}
+	
+	public void verifyThatAttachmentisInTheLetter () {
+	Browser.waitForVisibility(driver, attachmentInTheLetter);
+	Assert.assertNotNull(attachmentInTheLetter);
 	}
 
 	public RecipientMailBox addNewAccount() {

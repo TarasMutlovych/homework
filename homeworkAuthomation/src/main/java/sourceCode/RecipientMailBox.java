@@ -2,8 +2,11 @@ package sourceCode;
 
 import java.util.Set;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class RecipientMailBox {
 
@@ -28,8 +31,9 @@ public class RecipientMailBox {
 		senderMailBox.logIntoTheMailBox(email, pass);
 	}
 	
-	public void verifyTheLetterArrives (String letterSubject) {
-		SenderMailBox senderMailBox = new SenderMailBox (driver);
-		senderMailBox.verifyThatLetterIsPresent(letterSubject);
+	public void verifyTheLetterArrives (String subject) {
+		WebDriverWait wait = new WebDriverWait(driver, 15);
+		wait.until(ExpectedConditions
+				.presenceOfAllElementsLocatedBy(By.xpath("//span/*[contains(text(),'" + subject + "')]")));
 	}
 }
