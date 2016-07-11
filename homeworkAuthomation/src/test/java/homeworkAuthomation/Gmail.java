@@ -6,19 +6,24 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import libraries.Browser;
+import libraries.Tools;
 import sourceCode.RecipientMailBox;
 import sourceCode.SenderMailBox;
 
 public class Gmail {
 
 	private WebDriver browser;
+	
+	SenderMailBox senderMailBox;
+	RecipientMailBox recipientMailBox;
+	
+	
+	private String letterSubject;
+	private String letterBody;
+	
 	private String URL = "https://www.google.com/intl/en/mail/help/about.html";
 	private String senderEmail = "testqwerty1970@gmail.com";
 	private String senderPass = "123456789QW";
-	private String letterSubject = "Suppose the final test";
-	private String letterBody = "Just the body";
-	SenderMailBox senderMailBox;
-	RecipientMailBox recipientMailBox;
 	private String recipientEmail = "tarasmytlovych@gmail.com";
 	private	String recipientPass = "dominic001";
 	
@@ -27,6 +32,8 @@ public class Gmail {
 		browser = Browser.openChrome();
 		//browser = Browser.openFirefox();
 		senderMailBox = SenderMailBox.openTheLogInPage(browser, URL);
+		letterSubject = Tools.getRandomString(10);
+		letterBody = Tools.getRandomString(20);
 	}
 	
 	@Test (priority = 1)
