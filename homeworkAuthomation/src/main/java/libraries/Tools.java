@@ -58,7 +58,7 @@ public class Tools {
 	}
 
 	public static void deleteTheFile(String fileDestination, String fileName) {
-		File fExcel = new File(fileDestination + "//" + fileName);
+		File fExcel = new File(fileDestination + "\\" + fileName);
 		fExcel.delete();
 	}
 

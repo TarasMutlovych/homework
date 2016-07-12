@@ -17,11 +17,13 @@ import ru.yandex.qatools.allure.annotations.Step;
 public class BookingStartPage {
 
 	private static WebDriver driver;
-	
+
 	public BookingStartPage(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
+
+	private BookingCalendar bookingCalendar;
 
 	@FindBy(xpath = "//li[@id = 'current_account'][position() = 2]//div")
 	WebElement signInButtonOnTheStartScreen;
@@ -40,6 +42,9 @@ public class BookingStartPage {
 
 	@FindBy(css = "ul.c-autocomplete__list.sb-autocomplete__list.-visible li[data-i='0']")
 	WebElement HotelInAutocompilelist;
+
+	@FindBy(css = "")
+	private List<WebElement> months;
 
 	@FindAll({
 
@@ -66,16 +71,12 @@ public class BookingStartPage {
 	@FindBy(css = "div.sb-calendar__dates.sb-searchbox__clearfix.-interactive.-enabled.-outside")
 	List<WebElement> openCalendarForm2;
 
-	@FindBys({
-		@FindBy(css = "div.c2-wrapper-s-checkin div[data-id = 'M1464739200000']"), 
-		@FindBy(css = "td[data-id = '1466553600000']")
-		})
+	@FindBys({ @FindBy(css = "div.c2-wrapper-s-checkin div[data-id = 'M1464739200000']"),
+			@FindBy(css = "td[data-id = '1466553600000']") })
 	WebElement checkInDateForm2;
 
-	@FindBys({
-		@FindBy(css = "div.c2-wrapper-s-checkout div[data-id = 'M1464739200000']"),
-		@FindBy(css = "td[data-id = '1467244800000'") 
-		})
+	@FindBys({ @FindBy(css = "div.c2-wrapper-s-checkout div[data-id = 'M1464739200000']"),
+			@FindBy(css = "td[data-id = '1467244800000'") })
 	WebElement checkOutDateForm2;
 
 	@FindBy(id = "frm")
@@ -83,14 +84,12 @@ public class BookingStartPage {
 
 	@FindBy(css = "ul.b-popular_list.lp_endorsements_popular_destinations_container + p > a")
 	WebElement moreDestinatoins;
-	
 
 	public static BookingStartPage openStartPage(WebDriver browser, String theSiteURL) {
 		browser.get(theSiteURL);
-		return new BookingStartPage (browser);
+		return new BookingStartPage(browser);
 	}
 
-	
 	// User First And Last Name Verification
 	private void expandLoginPopUpWindow() {
 		Browser.waitForVisibility(driver, signInButtonOnTheStartScreen);
@@ -197,13 +196,35 @@ public class BookingStartPage {
 		return new ResultsPage(driver);
 	}
 
-	
-	//Test 5 - Working with Excel file
+	// Test 5 - Working with Excel file
 	@Step
 	public DestinationsPage clickMoreDestinatons() {
 		Browser.waitForVisibility(driver, moreDestinatoins);
-		moreDestinatoins.click(); 
+		moreDestinatoins.click();
 		return new DestinationsPage(driver);
+	}
+
+	// Calendar
+
+	public void openCheckInCalendar() {
+		bookingCalendar = new BookingCalendar(driver);
+		bookingCalendar.openCheckInCalendar();
+	}
+
+	public void selectDesiredMonth(String desiredMonth) {
+		bookingCalendar = new BookingCalendar(driver);
+		bookingCalendar.selectDesiredMonth(desiredMonth);
+	}
+
+	public void selectDesiredDate(String month, String desiredDate) {
+		bookingCalendar = new BookingCalendar(driver);
+		bookingCalendar.selectDesiredDate(month, desiredDate);
+		;
+	}
+
+	public void openCheckOutCalendar() {
+		bookingCalendar = new BookingCalendar(driver);
+		bookingCalendar.openCheckOutCalendar();
 	}
 
 }
