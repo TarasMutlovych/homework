@@ -213,18 +213,23 @@ public class BookingStartPage {
 
 	public void selectDesiredMonth(String desiredMonth) {
 		bookingCalendar = new BookingCalendar(driver);
-		bookingCalendar.selectDesiredMonth(desiredMonth);
+		bookingCalendar.selectDesiredCheckInMonth(desiredMonth);
 	}
 
 	public void selectDesiredDate(String month, String desiredDate) {
 		bookingCalendar = new BookingCalendar(driver);
-		bookingCalendar.selectDesiredDate(month, desiredDate);
+		bookingCalendar.selectDesiredCheckInDate(month, desiredDate);
 		;
 	}
 
 	public void openCheckOutCalendar() {
 		bookingCalendar = new BookingCalendar(driver);
 		bookingCalendar.openCheckOutCalendar();
+	}
+	
+	public void selectDesiredCheckOutMonth(String desiredMonth) {
+		bookingCalendar = new BookingCalendar(driver);
+		bookingCalendar.selectDesiredCheckOutMonth(desiredMonth);;
 	}
 
 }

@@ -32,9 +32,10 @@ public class TestCalendarClass {
 	@Test
 	public void test () {
 		bookingStartPage.openCheckInCalendar();
-		bookingStartPage.selectDesiredMonth("December");
-		bookingStartPage.selectDesiredDate("December", "1");
+		bookingStartPage.selectDesiredMonth("January 2017");
+		bookingStartPage.selectDesiredDate("January 2017", "22");
 		
 		bookingStartPage.openCheckOutCalendar();
+		bookingStartPage.selectDesiredCheckOutMonth("February 2017");
 	}
 }
