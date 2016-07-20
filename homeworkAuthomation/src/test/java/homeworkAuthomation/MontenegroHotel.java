@@ -25,25 +25,25 @@ public class MontenegroHotel {
 	private String hotelName = "Hotel Montenegro";
 
 	//Make sure that date format is "dd/year-mm"
-	private String checInDate = "22/2016-6";
+	private String checInDate = "2017-1";
 	private String checkOutDate = "30/2016-6";
  
 
 	@BeforeClass
 	public void setUp() {
-		browser = Browser.openFirefox();
-		//browser = Browser.openChrome();
+		//browser = Browser.openFirefox();
+		browser = Browser.openChrome();
 		bookingStartPage = BookingStartPage.openStartPage(browser, theSiteURL);
 	}
 	
 	@Test
 	public void searchForHotel() {
-		bookingStartPage.enterHotelName(hotelName);
+		//bookingStartPage.enterHotelName(hotelName);
 		bookingStartPage.selectCheckInDate(checInDate);
-		bookingStartPage.selectCheckOutDate(checkOutDate);
-		resultsPage  = bookingStartPage.searchForTheHotel();
+		//bookingStartPage.selectCheckOutDate(checkOutDate);
+		//resultsPage  = bookingStartPage.searchForTheHotel();
 	}
-	
+	/*
 	@Test(dependsOnMethods = "searchForHotel") 
 	public void checkThatHotelPresentsInResultList() {
 		resultsPage.checkThePresenceOfHotel(hotelName);
@@ -71,5 +71,5 @@ public class MontenegroHotel {
 	public void tearDown() {
 		//Browser.close();
 	}
-	
+	*/
 }

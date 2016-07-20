@@ -5,7 +5,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import libraries.Browser;
-import sourceCode.BookingCalendar;
+import libraries.DatePicker;
 import sourceCode.BookingStartPage;
 
 public class TestCalendarClass {
@@ -13,13 +13,18 @@ public class TestCalendarClass {
 	
 	private WebDriver browser;
 	
+	
 	BookingStartPage bookingStartPage;
+	//BookingCalendarPicker calendarPicker;
+	
+	
+	//private DatePicker calendarDatePicker;
 	
 	private String theSiteURL = "http://www.booking.com/";
 	private String hotelName = "Hotel Montenegro";
 
 	//Make sure that date format is "dd/year-mm"
-	private String checInDate = "22/2016-6";
+	private String checInDate = "22/2016-10";
 	private String checkOutDate = "30/2016-6";
 
 	@BeforeClass
@@ -31,11 +36,19 @@ public class TestCalendarClass {
 	
 	@Test
 	public void test () {
+		bookingStartPage.openCalendar();
+		bookingStartPage.selectCheckInDate1(checInDate);
+		//calendarPicker = BookingCalendarPicker.getInstanse(browser);
+		//calendarPicker.openCheckInCalendar();
+		/*
 		bookingStartPage.openCheckInCalendar();
-		bookingStartPage.selectDesiredMonth("January 2017");
-		bookingStartPage.selectDesiredDate("January 2017", "22");
+		
+		bookingStartPage.selectDesiredMonth("30/2016-10");
+		//bookingStartPage.selectDesiredDate("January 2017", "22");
 		
 		bookingStartPage.openCheckOutCalendar();
 		bookingStartPage.selectDesiredCheckOutMonth("February 2017");
+		bookingStartPage.selectDesiredCheckOutDate("February 2017", "2");
+		*/
 	}
 }
