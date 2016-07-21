@@ -25,11 +25,15 @@ public class BookingStartPage {
 		PageFactory.initElements(driver, this);
 	}
 
-	//private BookingCalendarDatePlusYear bookingCalendar;
-	//private BookingCalendarPicker bookingCalendarPicker;
+	@FindBy(xpath = "//img[contains(@src,'gb')]")
+	WebElement defaultEnglish;
 
-	
-	
+	@FindBy(css = "li.user_center_option.uc_language")
+	WebElement languageChangingButton;
+
+	@FindBy(xpath = "//span[contains(text(), 'English')]")
+	WebElement englishLanguageButton;
+
 	@FindBy(xpath = "//li[@id = 'current_account'][position() = 2]//div")
 	WebElement signInButtonOnTheStartScreen;
 
@@ -48,9 +52,6 @@ public class BookingStartPage {
 	@FindBy(css = "ul.c-autocomplete__list.sb-autocomplete__list.-visible li[data-i='0']")
 	WebElement HotelInAutocompilelist;
 
-	@FindBy(css = "")
-	private List<WebElement> months;
-
 	// calendar final
 	@FindAll({
 			// form #1 with separate fields for days and month
@@ -65,29 +66,6 @@ public class BookingStartPage {
 	@FindBy(css = "div.sb-dates__grid")
 	WebElement caledarForm;
 	// calendar final
-
-	@FindBy(name = "checkin_monthday")
-	WebElement droplistMonthDay;
-
-	@FindBy(name = "checkin_year_month")
-	WebElement droplistMonthYear;
-
-	@FindBy(name = "checkout_monthday")
-	WebElement droplistMonthDayCheckOut;
-
-	@FindBy(name = "checkout_year_month")
-	WebElement droplistMonthYearCheckOut;
-
-	@FindBy(css = "div.sb-calendar__dates.sb-searchbox__clearfix.-interactive.-enabled.-outside")
-	List<WebElement> openCalendarForm2;
-
-	@FindBys({ @FindBy(css = "div.c2-wrapper-s-checkin div[data-id = 'M1464739200000']"),
-			@FindBy(css = "td[data-id = '1466553600000']") })
-	WebElement checkInDateForm2;
-
-	@FindBys({ @FindBy(css = "div.c2-wrapper-s-checkout div[data-id = 'M1464739200000']"),
-			@FindBy(css = "td[data-id = '1467244800000'") })
-	WebElement checkOutDateForm2;
 
 	@FindBy(id = "frm")
 	WebElement searchForm;
@@ -125,6 +103,18 @@ public class BookingStartPage {
 
 	// Searching for Montenegro Hotel
 
+	public void setEnglishLanguage() {
+		Browser.waitForVisibility(driver, languageChangingButton);
+		if (defaultEnglish != null) {
+
+			Browser.moveToElementAndClick(driver, languageChangingButton);
+
+			Browser.waitForVisibility(driver, englishLanguageButton);
+			Browser.moveToElementAndClick(driver, englishLanguageButton);
+
+		} else {		}
+	}
+
 	@Step
 	public void enterHotelName(String hotelName) {
 		Browser.waitForVisibility(driver, searchInputField);
@@ -132,95 +122,6 @@ public class BookingStartPage {
 		Browser.sleepForMilisecs(2000);
 		Actions actions = new Actions(driver);
 		actions.moveToElement(HotelInAutocompilelist).click().build().perform();
-
-	}
-
-	private String monthDay;
-	private String yearMonth;
-	private String monthYear;
-	private String desiredMonth;
-	private String desiredYear;
-
-	String[] monthList = new DateFormatSymbols().getMonths();
-
-	@Step
-	public void selectCheckInDate(String CheckInDate) {
-
-		String[] dates = CheckInDate.split("/");
-		for (String parsedDate : dates) {
-			if (parsedDate.length() <= 2) {
-				monthDay = parsedDate;
-			} else {
-				yearMonth = parsedDate;
-			}
-		}
-		System.out.println("yearMonth" + yearMonth);
-		int dateInputs = dateInputFields.size();
-
-		if (dateInputs == 4) {
-			Select droplistDay = new Select(droplistMonthDay);
-			droplistDay.selectByValue(monthDay);
-			Select droplistMonth = new Select(droplistMonthYear);
-			droplistMonth.selectByValue(yearMonth);
-			monthDay = null;
-			yearMonth = null;
-		} else {
-			bookingCalendar = new BookingCalendarDatePlusYear(driver);
-			bookingCalendar.openCheckInCalendar();
-
-			String[] dataToSplit = yearMonth.split("-");
-			for (String parsedDate1 : dataToSplit) {
-				if (parsedDate1.length() == 4) {
-					desiredYear = parsedDate1;
-				} else {
-					int i = Integer.parseInt(parsedDate1);
-					desiredMonth = monthList[i - 1];
-				}
-			}
-
-			monthYear = desiredMonth + " " + desiredYear;
-			System.out.println("monthYear: " + monthYear);
-			bookingCalendar.selectDesiredCheckInMonth(desiredMonth);
-
-			/*
-			 * Browser.sleepForMilisecs(2000); WebElement checkInCalendar =
-			 * openCalendarForm2.get(0); Browser.moveToElementAndClick(driver,
-			 * checkInCalendar);
-			 * 
-			 * Browser.sleepForMilisecs(2000);
-			 * Browser.moveToElementAndClick(driver, checkInDateForm2);
-			 */
-		}
-	}
-
-	@Step
-	public void selectCheckOutDate(String checkOutDate) {
-
-		String[] dates = checkOutDate.split("/");
-		for (String parsedDate : dates) {
-			if (parsedDate.length() <= 2) {
-				monthDay = parsedDate;
-			} else {
-				yearMonth = parsedDate;
-			}
-		}
-
-		int dateInputs = dateInputFields.size();
-
-		if (dateInputs == 4) {
-			Select droplistDay = new Select(droplistMonthDayCheckOut);
-			droplistDay.selectByValue(monthDay);
-			Select droplistMonth = new Select(droplistMonthYearCheckOut);
-			droplistMonth.selectByValue(yearMonth);
-			monthDay = null;
-			yearMonth = null;
-		} else {
-			WebElement checkOutCalendar = openCalendarForm2.get(1);
-			Browser.moveToElementAndClick(driver, checkOutCalendar);
-
-			Browser.sleepForMilisecs(2000);
-			Browser.moveToElementAndClick(driver, checkOutDateForm2);
-		}
 
 	}
 
@@ -238,67 +139,10 @@ public class BookingStartPage {
 		return new DestinationsPage(driver);
 	}
 
-	// Calendar
-
-	public void openCheckInCalendar(WebDriver driver) {
-		bookingCalendarPicker = BookingCalendarPicker.getInstanse(driver);
-		bookingCalendarPicker.openCheckInCalendar();
-	}
-
-	public void selectDesiredMonth(String CheckInDate) {
-		String[] dates = CheckInDate.split("/");
-		for (String parsedDate : dates) {
-			if (parsedDate.length() <= 2) {
-				monthDay = parsedDate;
-			} else {
-				desiredMonth = parsedDate;
-			}
-		}
-
-		bookingCalendar = new BookingCalendarDatePlusYear(driver);
-		String[] dataToSplit = desiredMonth.split("-");
-		for (String parsedDate : dataToSplit) {
-			if (parsedDate.length() == 4) {
-				desiredYear = parsedDate;
-			} else {
-				int i = Integer.parseInt(parsedDate);
-				desiredMonth = monthList[i - 1];
-			}
-		}
-
-		monthYear = desiredMonth + " " + desiredYear;
-
-		bookingCalendar.selectDesiredCheckInMonth(monthYear);
-	}
-
-	public void selectDesiredDate(String month, String desiredDate) {
-		bookingCalendar = new BookingCalendarDatePlusYear(driver);
-		bookingCalendar.selectDesiredCheckInDate(month, desiredDate);
-		;
-	}
-
-	public void openCheckOutCalendar() {
-		bookingCalendar = new BookingCalendarDatePlusYear(driver);
-		bookingCalendar.openCheckOutCalendar();
-	}
-
-	public void selectDesiredCheckOutMonth(String desiredMonth) {
-		bookingCalendar = new BookingCalendarDatePlusYear(driver);
-		bookingCalendar.selectDesiredCheckOutMonth(desiredMonth);
-		;
-	}
-
-	public void selectDesiredCheckOutDate(String month, String desiredDate) {
-		bookingCalendar = new BookingCalendarDatePlusYear(driver);
-		bookingCalendar.selectDesiredCheckOutDate(month, desiredDate);
-		;
-		;
-	}
-
 	// Hopefully final implementation
-	
+
 	private DatePicker calendarDatePicker;
-	
+
 	private DatePicker openCorrectCalendarInstance() {
 
 		Browser.waitForVisibility(driver, caledarForm);
@@ -312,8 +156,8 @@ public class BookingStartPage {
 			// System.out.println("option 2");
 		}
 	}
-	
-	public void openCalendar () {
+
+	public void openCalendar() {
 		calendarDatePicker = openCorrectCalendarInstance();
 		calendarDatePicker.openCheckInCalendar();
 	}
@@ -321,6 +165,13 @@ public class BookingStartPage {
 	public void selectCheckInDate1(String checInDate) {
 		calendarDatePicker.selectCheckInDate1(checInDate);
 	}
-	
-	
+
+	public void openCheckOutCalendar1() {
+		calendarDatePicker.openCheckOutCalendar();
+	}
+
+	public void selectDesiredCheckOutDate1(String checkOutDate) {
+		calendarDatePicker.selectDesiredCheckOutDate1(checkOutDate);
+	}
+
 }

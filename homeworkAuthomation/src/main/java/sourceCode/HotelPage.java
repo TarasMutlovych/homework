@@ -11,11 +11,11 @@ import org.testng.Assert;
 import libraries.Browser;
 import ru.yandex.qatools.allure.annotations.Step;
 
-public class HotelMontenegroPage {
+public class HotelPage {
 
 	WebDriver driver;
 	
-	public HotelMontenegroPage (WebDriver driver) {
+	public HotelPage (WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
 	}
