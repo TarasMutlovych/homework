@@ -29,7 +29,9 @@ public class UserNameVerification {
 	public void setUp() {
 		browser = Browser.openFirefox();
 		//browser = Browser.openChrome();
-		bookingStartPage = BookingStartPage.openStartPage(browser, theSiteURL);
+		browser.get(theSiteURL);
+/*		bookingStartPage = BookingStartPage.openStartPage(browser, theSiteURL);*/
+		bookingStartPage = new BookingStartPage(browser);
 	}
 
 	@Test(priority = 1)

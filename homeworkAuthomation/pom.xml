@@ -33,7 +33,7 @@
 							-javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar
 						</argLine>
 					</configuration>
-					
+
 					<dependencies>
 						<dependency>
 							<groupId>org.aspectj</groupId>
@@ -42,7 +42,7 @@
 						</dependency>
 
 					</dependencies>
-					
+
 				</plugin>
 
 				<plugin>
@@ -86,11 +86,22 @@
 		</dependency>
 
 		<dependency>
+			<groupId>ru.yandex.qatools.htmlelements</groupId>
+			<artifactId>htmlelements-java</artifactId>
+			<version>1.15</version>
+		</dependency>
+
+		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi-ooxml</artifactId>
 			<version>3.14</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.4</version>
+		</dependency>
 
 		<dependency>
 			<groupId>net.sourceforge.jexcelapi</groupId>

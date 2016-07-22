@@ -1,6 +1,5 @@
 package sourceCode;
 
-import java.text.DateFormatSymbols;
 import java.util.List;
 
 import org.openqa.selenium.WebDriver;
@@ -8,34 +7,34 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
 
+import htmlelements.BookingHeader;
 import libraries.Browser;
 import libraries.DatePicker;
 import ru.yandex.qatools.allure.annotations.Step;
+import ru.yandex.qatools.htmlelements.loader.HtmlElementLoader;
 
 public class BookingStartPage {
 
 	private static WebDriver driver;
+	
+	
+	/// May be added to headers
 
-	public BookingStartPage(WebDriver driver) {
-		this.driver = driver;
-		PageFactory.initElements(driver, this);
-	}
+	@FindBy(css = "li.user_center_option.uc_language")
+	WebElement languageChangingButton;
+/*
+	@FindBy(xpath = "//li[@id = 'current_account'][position() = 2]//div")
+	WebElement signInButtonOnTheStartScreen;
+*/
+	// end of candidates
 
 	@FindBy(xpath = "//img[contains(@src,'gb')]")
 	WebElement defaultEnglish;
 
-	@FindBy(css = "li.user_center_option.uc_language")
-	WebElement languageChangingButton;
-
 	@FindBy(xpath = "//span[contains(text(), 'English')]")
 	WebElement englishLanguageButton;
-
-	@FindBy(xpath = "//li[@id = 'current_account'][position() = 2]//div")
-	WebElement signInButtonOnTheStartScreen;
 
 	@FindBy(className = "user_access_email")
 	WebElement emailAddressField;
@@ -73,6 +72,14 @@ public class BookingStartPage {
 	@FindBy(css = "ul.b-popular_list.lp_endorsements_popular_destinations_container + p > a")
 	WebElement moreDestinatoins;
 
+	private BookingHeader bookingHeader;
+	
+	public BookingStartPage(WebDriver driver) {
+		this.driver = driver;
+		//PageFactory.initElements(driver, this);
+		HtmlElementLoader.populatePageObject(this,driver);	
+	}
+
 	public static BookingStartPage openStartPage(WebDriver browser, String theSiteURL) {
 		browser.get(theSiteURL);
 		return new BookingStartPage(browser);
@@ -80,8 +87,9 @@ public class BookingStartPage {
 
 	// User First And Last Name Verification
 	private void expandLoginPopUpWindow() {
-		Browser.waitForVisibility(driver, signInButtonOnTheStartScreen);
-		signInButtonOnTheStartScreen.click();
+		//Browser.waitForVisibility(driver, bookingHeader.signInButton);
+		//bookingHeader.signInButton.click();
+		bookingHeader.expandLoginPopUpWindow();
 	}
 
 	@Step
@@ -112,7 +120,8 @@ public class BookingStartPage {
 			Browser.waitForVisibility(driver, englishLanguageButton);
 			Browser.moveToElementAndClick(driver, englishLanguageButton);
 
-		} else {		}
+		} else {
+		}
 	}
 
 	@Step

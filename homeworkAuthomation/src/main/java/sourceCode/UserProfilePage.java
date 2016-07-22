@@ -27,6 +27,7 @@ public class UserProfilePage {
 	WebElement userSurname;
 
 	// Search lviv Region
+	
 	@FindBy(xpath = "//a[@class = 'header_link_new_icon popover_trigger']")
 	WebElement getDestinationTipsButton;
 
