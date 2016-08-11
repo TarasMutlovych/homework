@@ -35,7 +35,7 @@ public class MontenegroHotel {
 	}
 
 	@Test
-	public void searchForHotel() {
+	public void checkThatHotelPresentsInResultList() {
 		bookingStartPage.enterHotelName(hotelName);
 		bookingStartPage.openCalendar();
 		bookingStartPage.selectCheckInDate1(checInDate);
@@ -43,26 +43,17 @@ public class MontenegroHotel {
 		bookingStartPage.openCheckOutCalendar1();
 		bookingStartPage.selectDesiredCheckOutDate1(checkOutDate);
 		resultsPage = bookingStartPage.searchForTheHotel();
-	}
 
-	@Test(dependsOnMethods = "searchForHotel")
-	public void checkThatHotelPresentsInResultList() {
 		resultsPage.checkThePresenceOfHotel(hotelName);
 	}
 
 	// Verifying free WiFi and Parking presence
 	@Test(dependsOnMethods = "checkThatHotelPresentsInResultList")
-	public void openHotelMontenegroPage() {
+	public void checkFreeWiFiAndFreeParking() {
 		hotelPage = resultsPage.clickShowPropertiesButton();
-	}
-
-	@Test(dependsOnMethods = "openHotelMontenegroPage")
-	public void checkFreeWiFi() {
+	
 		hotelPage.checkPresenceOfFreeWiFiBenefit();
-	}
-
-	@Test(dependsOnMethods = "openHotelMontenegroPage")
-	public void checkFreeParking() {
+	
 		hotelPage.checkPresenceOfFreeParkingBenefit();
 	}
 

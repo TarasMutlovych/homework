@@ -32,7 +32,7 @@ public class IndustrialAllianceStartPage {
 		return new IndustrialAllianceStartPage(browser);
 	}
 
-	public void verifyTheLanguage(String language) {
+	public void setTheLanguage(String language) {
 
 		Browser.waitForVisibility(driver, changeLanguageEnButton);
 		String languageToChange = changeLanguageEnButton.getText();

@@ -34,7 +34,7 @@ public class UserNameVerification {
 	}
 
 	@Test(priority = 1)
-	public void logIntoBookingCom() {
+	public void userNameAndSurnameVerification() {
 		bookingStartPage.enterLogin(login);
 		bookingStartPage.enterPassword(pass);
 		userProfilePage = bookingStartPage.submitCredentials();
@@ -46,13 +46,10 @@ public class UserNameVerification {
 	//Lviv region, Ukraine
 	
 	@Test(priority = 2)
-	public void openDestinationTipsPage() {
+	public void verifyThePresenceOfLvivInDestinationsList() {
 		userProfilePage.clickGetDestinationTipsButton();
+		
 		destinationTipsPage = userProfilePage.clickStartExploringButton();
-	}
-	
-	@Test(priority = 4)
-	public void searchResultsForLvivRegionUkraine () {
 		destinationTipsPage.enterLvivIntoSearch("Lviv");
 		destinationTipsPage.selectLvivRegionFromDropdown();
 		destinationTipsPage.clickSearchButton();

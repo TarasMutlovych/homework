@@ -34,23 +34,20 @@ public class FinGroupiACiteTest {
 		browser = Browser.openChrome();
 		//browser = Browser.openFirefox();
 		industrialAllianceStartPage = IndustrialAllianceStartPage.openStartPage(browser, theSiteURL);
-		industrialAllianceStartPage.verifyTheLanguage(language);
+		industrialAllianceStartPage.setTheLanguage(language);
 	}
 
+
 	@Test(priority = 1)
-	public void openMortgagePaymentCalculatorPage() {
+	public void verifyTheSliderMoving() {
 		industrialAllianceStartPage.clickLoansButton();
 		mortgagePage = industrialAllianceStartPage.clickMortagesButton();
 		mortgagePaymentCalculator = mortgagePage.clickCalculateYourPaymentsButton();
-	}
-
-	@Test(priority = 2)
-	public void verifyTheSliderMoving() {
 		mortgagePaymentCalculator.moveSlider(pointsToMovePurchasePriceSlider);
 		mortgagePaymentCalculator.verifyTheSliderMoving();
 	}
 
-	@Test(priority = 3)
+	@Test(priority = 2)
 	public void verifyThePayments() {
 		mortgagePaymentCalculator.changePurchasePrice(desiredPurchasePrice);
 		mortgagePaymentCalculator.changeDownPayment(desiredDownPayment);
