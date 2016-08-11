@@ -17,18 +17,6 @@ public class Browser {
 	private static WebDriver driver;
 
 	public static WebDriver openFirefox() {
-/*	String userDir = System.getProperty("user.dir");
-		String pathToFireFoxdriver = userDir + "\\testware\\browsers\\Firefox4601.exe";
-		System.setProperty("webdriver.firefox.exe",pathToFireFoxdriver);
-		WebDriver driver=new  FirefoxDriver();
-		 
-		String pathToFireFoxdriver = "C:\\Users\\Mozilla Firefox47\\firefox.exe";
-		//String pathToFireFoxdriver = "C:\\Program Files (x86)\\Mozilla Firefox\\firefox.exe";
-		File pathToBinary = new File(pathToFireFoxdriver);
-		FirefoxBinary ffBinary = new FirefoxBinary(pathToBinary);
-		FirefoxProfile firefoxProfile = new FirefoxProfile();       
-		driver = new FirefoxDriver(ffBinary,firefoxProfile);
-*/
 		
 		driver = new FirefoxDriver();
 		driver.manage().window().maximize();
