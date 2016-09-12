@@ -79,4 +79,10 @@ public class Browser {
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0, -700)", "");
 	}
+
+
+public static void refreshThePage(WebDriver driver) {
+	driver.navigate().refresh();
+}
+
 }
