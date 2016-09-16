@@ -45,4 +45,52 @@ public class FirstSupervisorPage implements UserPage {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void setFirstName(String firstName) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setLastName(String lastName) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void verifyThatNameisCahngedAbobeTheAvatar(String firstName, String lastName) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void tickMaleGender() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void tickFemaleGender() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void verifyThatGenderChangingsIsSaved(String correctGender) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void expandMaritalStatusDropdown() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void verifyMaritalOptions() {
+		// TODO Auto-generated method stub
+		
+	}
 }
